@@ -25,28 +25,28 @@ if ! [ -x "$(command -v aws)" ]; then
 fi
 
 if [[ $# -eq 0 ]] ; then
-    trap print_error "Please provide the hostname:port as argument, for example $0 host_inside_vpc:3306"
+  trap print_error "Please provide the hostname:port as argument, for example $0 host_inside_vpc:3306"
 fi
 
 if [ ! -f "$SSH_PUB_KEY_FILE" ] ; then
-    trap print_error "The ssh public key does not exist"
+  trap print_error "The ssh public key does not exist"
 fi
 
 
 INSTANCE_ID=$(aws ec2 describe-instances \
-               --region $REGION \
+               --region "${REGION}" \
                --filter "Name=tag:Name,Values=$NAME" \
                --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
                --output text)
 
-AZ=$(aws ec2 describe-instances --region $REGION --filter "Name=tag:Name,Values=$NAME" "Name=instance-state-code,Values=16" --output json| jq -r '.Reservations[].Instances[].Placement.AvailabilityZone')
+AZ=$(aws ec2 describe-instances --region "${REGION}" --filter "Name=tag:Name,Values=$NAME" "Name=instance-state-code,Values=16" --output json| jq -r '.Reservations[].Instances[].Placement.AvailabilityZone')
 
 if [ "${INSTANCE_ID}" == "" ];then
-    trap print_error "No instance with ssm running could be found"
+  trap print_error "No instance with ssm running could be found"
 fi
 
 echo -n "Provisioning Bastion SSH Instance with temporary key .... "
-aws ec2-instance-connect send-ssh-public-key --region $REGION --instance-id $INSTANCE_ID --availability-zone $AZ --instance-os-user ec2-user --ssh-public-key file://$SSH_PUB_KEY_FILE 2>&1 > /dev/null || trap print_error "Failed"
+aws ec2-instance-connect send-ssh-public-key --region $REGION --instance-id "${INSTANCE_ID}" --availability-zone "${AZ}" --instance-os-user ec2-user --ssh-public-key file://$SSH_PUB_KEY_FILE 2>&1 > /dev/null || trap print_error "Failed"
 echo "Success!"
 
 echo "127.0.0.1:$DEV_LOCAL_PORT is forwarding to $FORWARD_TO"

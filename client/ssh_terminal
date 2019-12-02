@@ -21,7 +21,7 @@ if ! [ -x "$(command -v aws)" ]; then
 fi
 
 INSTANCE_ID=$(aws ec2 describe-instances \
-               --region $REGION \
+               --region "${REGION}" \
                --filter "Name=tag:Name,Values=$NAME" \
                --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
                --output text)
@@ -30,4 +30,4 @@ if [ "${INSTANCE_ID}" == "" ];then
   trap print_error "No instance with ssm running could be found"
 fi
 
-exec aws ssm start-session --target $INSTANCE_ID --region $REGION
+exec aws ssm start-session --target "${INSTANCE_ID}" --region "${REGION}"
