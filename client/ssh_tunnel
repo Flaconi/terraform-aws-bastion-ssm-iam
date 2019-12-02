@@ -42,7 +42,7 @@ INSTANCE_ID=$(aws ec2 describe-instances \
 AZ=$(aws ec2 describe-instances --region $REGION --filter "Name=tag:Name,Values=$NAME" "Name=instance-state-code,Values=16" --output json| jq -r '.Reservations[].Instances[].Placement.AvailabilityZone')
 
 if [ "${INSTANCE_ID}" == "" ];then
-~     trap print_error "No instance with ssm running could be found"
+    trap print_error "No instance with ssm running could be found"
 fi
 
 echo -n "Provisioning Bastion SSH Instance with temporary key .... "
