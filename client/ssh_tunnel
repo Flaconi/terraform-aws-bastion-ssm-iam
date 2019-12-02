@@ -24,6 +24,10 @@ if ! [ -x "$(command -v aws)" ]; then
   trap print_error 'The command aws is required'
 fi
 
+if ! [ -x "$(command -v session-manager-plugin)" ]; then
+  trap print_error 'The command session-manager-plugin is required'
+fi
+
 if [[ $# -eq 0 ]] ; then
   trap print_error "Please provide the hostname:port as argument, for example $0 host_inside_vpc:3306"
 fi

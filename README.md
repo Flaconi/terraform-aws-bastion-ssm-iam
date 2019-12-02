@@ -10,6 +10,8 @@ Terraform module which provides a Bastion for AWS utilizing
 * ec2-instance-connect, for the creation of temporary ssh keys on the instance
 
 __NOTE__ Important, this module managed the SSM Document SSM-SessionManagerRunShell, in some cases it already exists. To make sure Terraform is used to maintain this Document please execute: `aws ssm delete-document --name SSM-SessionManagerRunShell`
+__NOTE__ For this to work you need to install the session manager plugin for the AWSCLI, click (here)[https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html] for more information.
+
 ## Examples
 
 Check the [examples](examples) directory for installation.

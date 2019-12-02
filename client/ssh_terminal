@@ -20,6 +20,10 @@ if ! [ -x "$(command -v aws)" ]; then
   trap print_error 'The command aws is required'
 fi
 
+if ! [ -x "$(command -v session-manager-plugin)" ]; then
+  trap print_error 'The command session-manager-plugin is required'
+fi
+
 INSTANCE_ID=$(aws ec2 describe-instances \
                --region "${REGION}" \
                --filter "Name=tag:Name,Values=$NAME" \
