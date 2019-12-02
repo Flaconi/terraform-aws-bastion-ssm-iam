@@ -30,17 +30,8 @@ data "aws_iam_policy_document" "kms_key_policy_iam_profile" {
   statement {
     effect = "Allow"
 
-
     actions = [
-      "kms:*",
-    ]
-    resources = ["*"]
-  }
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "kms:Encrypt"
+      "kms:Decrypt"
     ]
     resources = [aws_kms_key.this.arn]
   }
