@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REGION="${AWS_REGION:-eu-central-1}"
+NAME="${NAME:-bastion-ssm-iam}"
+SSM_DOCUMENT_NAME="${SSM_DOCUMENT_NAME:-SSM-SessionManagerRunShell}"
+
+function print_error {
+    read line file <<<$(caller)
+    echo "An error occurred in line $line of file $file:" >&2
+    sed "${line}q;d" "$file" >&2
+    exit 1
+}
+
+if ! [ -x "$(command -v jq)" ]; then
+  trap print_error 'The command jq is required'
+fi
+
+if ! [ -x "$(command -v aws)" ]; then
+  trap print_error 'The command aws is required'
+fi
+
+if ! [ -x "$(command -v session-manager-plugin)" ]; then
+  trap print_error 'The command session-manager-plugin is required'
+fi
+
+INSTANCE_ID=$(aws ec2 describe-instances \
+               --region "${REGION}" \
+               --filter "Name=tag:Name,Values=$NAME" \
+               --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
+               --output text)
+
+if [ "${INSTANCE_ID}" == "" ];then
+  trap print_error "No instance with ssm running could be found"
+fi
+
+exec aws ssm start-session --target "${INSTANCE_ID}" --region "${REGION}" --document-name "${SSM_DOCUMENT_NAME}"
