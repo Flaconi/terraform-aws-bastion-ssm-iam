@@ -26,6 +26,13 @@ variable "subnet_ids" {
   description = "The subnets where the Bastion can reside in, they can be private"
 }
 
+variable "create_new_ssm_document" {
+  type        = bool
+  description = "This module can create a new SSM document for the SSH Terminal"
+  default     = false
+}
+
+
 variable "create_security_group" {
   type        = bool
   description = "This module can create a security group for the bastion instance by default"

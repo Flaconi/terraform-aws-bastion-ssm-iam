@@ -4,6 +4,7 @@ set -euo pipefail
 
 REGION="${AWS_REGION:-eu-central-1}"
 NAME="${NAME:-bastion-ssm-iam}"
+SSM_DOCUMENT_NAME="${SSM_DOCUMENT_NAME:-SSM-SessionManagerRunShell}"
 
 function print_error {
     read line file <<<$(caller)
@@ -34,4 +35,4 @@ if [ "${INSTANCE_ID}" == "" ];then
   trap print_error "No instance with ssm running could be found"
 fi
 
-exec aws ssm start-session --target "${INSTANCE_ID}" --region "${REGION}"
+exec aws ssm start-session --target "${INSTANCE_ID}" --region "${REGION}" --document-name "${SSM_DOCUMENT_NAME}"
