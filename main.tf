@@ -3,7 +3,7 @@ locals {
   cloudwatch_prepend = "/aws/ec2/"
   # We use basename of the id to ensure dependency-order
   cloudwatch_loggroup_name = "${local.cloudwatch_prepend}${basename(aws_cloudwatch_log_group.this.id)}"
-	ssm_document_name = var.create_new_ssm_document ? "SSM-SessionManagerRunShell-${random_string.this.result}" : "SSM-SessionManagerRunShell"
+  ssm_document_name        = var.create_new_ssm_document ? "SSM-SessionManagerRunShell-${random_string.this.result}" : "SSM-SessionManagerRunShell"
 }
 
 # Creating a random string for name interpolation
@@ -20,7 +20,7 @@ resource "aws_cloudwatch_log_group" "this" {
 }
 
 resource "aws_ssm_document" "session_manager_prefs" {
-	name            = local.ssm_document_name
+  name            = local.ssm_document_name
   document_type   = "Session"
   document_format = "JSON"
 
