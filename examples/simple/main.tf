@@ -44,7 +44,7 @@ module "terraform-aws-bastion-ssm-iam" {
   # create_security_group = true
 
   # The module can create a diffent ssm document for this deployment, to allow
-	# different security models per BASTION deployment
+  # different security models per BASTION deployment
   # create_new_ssm_document = false
 
   # It is possible to attach other security groups to the bastion.
