@@ -1,0 +1,27 @@
+---
+
+###
+### Lints all generic and json files in the whole git repository
+###
+
+name: linting
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: Terraform lint
+        uses: actionshub/terraform-lint@main
+
+      - name: Files lint
+        run: |
+          make "lint-files"

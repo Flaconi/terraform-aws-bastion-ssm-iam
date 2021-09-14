@@ -1,0 +1,20 @@
+---
+
+###
+### Checks terraform-docs generation
+###
+
+name: terraform-docs
+on: [pull_request]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: terraform-docs
+        run: |
+          make terraform-docs
+          git diff --quiet || { echo "Build Changes"; git diff; git status; false; }
