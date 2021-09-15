@@ -1,6 +1,7 @@
 # AWS Bastion SSM IAM
 
-[![Build Status](https://travis-ci.com/Flaconi/terraform-aws-bastion-ssm-iam.svg?branch=master)](https://travis-ci.com/Flaconi/terraform-aws-bastion-ssm-iam)
+[![Lint Status](https://github.com/Flaconi/terraform-aws-bastion-ssm-iam/actions/workflows/linting.yml/badge.svg?branch=master)](https://github.com/Flaconi/terraform-aws-bastion-ssm-iam/actions/workflows/linting.yml)
+[![Docs Status](https://github.com/Flaconi/terraform-aws-bastion-ssm-iam/actions/workflows/terraform-docs.yml/badge.svg?branch=master)](https://github.com/Flaconi/terraform-aws-bastion-ssm-iam/actions/workflows/terraform-docs.yml)
 [![Tag](https://img.shields.io/github/tag/Flaconi/terraform-aws-bastion-ssm-iam.svg)](https://github.com/Flaconi/terraform-aws-bastion-ssm-iam/releases)
 [![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
@@ -39,18 +40,34 @@ Example:
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.26 |
+| aws | >= 3 |
+| random | >= 3.1 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 3 |
+| random | >= 3.1 |
+| template | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| subnet\_ids | The subnets where the Bastion can reside in, they can be private | list | n/a | yes |
-| vpc\_id | The VPC-ID | string | n/a | yes |
-| create\_new\_ssm\_document | This module can create a new SSM document for the SSH Terminal | bool | `"false"` | no |
-| create\_security\_group | This module can create a security group for the bastion instance by default | bool | `"true"` | no |
-| instance\_type | The instance type of the bastion | string | `"t3.nano"` | no |
-| log\_retention | The amount of days the logs need to be kept | number | `"30"` | no |
-| name | The name to be interpolated, defaults to bastion-ssm-iam | string | `"bastion-ssm-iam"` | no |
-| security\_group\_ids | The security group ids which can be given to the bastion instance, defaults to empty | list | `[]` | no |
+|------|-------------|------|---------|:--------:|
+| subnet\_ids | The subnets where the Bastion can reside in, they can be private | `list(string)` | n/a | yes |
+| vpc\_id | The VPC-ID | `string` | n/a | yes |
+| create\_new\_ssm\_document | This module can create a new SSM document for the SSH Terminal | `bool` | `false` | no |
+| create\_security\_group | This module can create a security group for the bastion instance by default | `bool` | `true` | no |
+| instance\_type | The instance type of the bastion | `string` | `"t3.nano"` | no |
+| log\_retention | The amount of days the logs need to be kept | `number` | `30` | no |
+| name | The name to be interpolated, defaults to bastion-ssm-iam | `string` | `"bastion-ssm-iam"` | no |
+| security\_group\_ids | The security group ids which can be given to the bastion instance, defaults to empty | `list(string)` | `[]` | no |
 
 ## Outputs
 
@@ -65,4 +82,4 @@ Example:
 
 [MIT](LICENSE)
 
-Copyright (c) 2019 [Flaconi GmbH](https://github.com/Flaconi)
+Copyright (c) 2021 [Flaconi GmbH](https://github.com/Flaconi)

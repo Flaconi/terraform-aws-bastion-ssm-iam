@@ -22,7 +22,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_ids" {
-  type        = list
+  type        = list(string)
   description = "The subnets where the Bastion can reside in, they can be private"
 }
 
@@ -40,7 +40,7 @@ variable "create_security_group" {
 }
 
 variable "security_group_ids" {
-  type        = list
+  type        = list(string)
   description = "The security group ids which can be given to the bastion instance, defaults to empty"
   default     = []
 }
