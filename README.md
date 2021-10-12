@@ -100,8 +100,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The security group id of the bastion server |
 | <a name="output_ssm_document_name"></a> [ssm\_document\_name](#output\_ssm\_document\_name) | The document name of SSM |
-| <a name="output_this_security_group_id"></a> [this\_security\_group\_id](#output\_this\_security\_group\_id) | The security group id of the bastion server |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
