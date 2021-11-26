@@ -4,3 +4,4 @@ sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/late
 sudo yum install -y ec2-instance-connect
 sudo systemctl enable amazon-ssm-agent
 sudo systemctl start amazon-ssm-agent
+sudo rm /etc/sudoers.d/ssm-agent-users
