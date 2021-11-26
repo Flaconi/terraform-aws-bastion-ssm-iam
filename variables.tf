@@ -10,6 +10,12 @@ variable "instance_type" {
   default     = "t3.nano"
 }
 
+variable "image_id" {
+  type        = string
+  description = "AMI to be used. If blank, latest amazon linux 2 will be used"
+  default     = ""
+}
+
 variable "log_retention" {
   type        = number
   description = "The amount of days the logs need to be kept"
