@@ -63,7 +63,7 @@ data "template_file" "init" {
 
 ## Creating Launch Configuration
 resource "aws_launch_configuration" "this" {
-  image_id                    = "ami-0658a5865c623362a"  #data.aws_ami.amazon_linux_2.id
+  image_id                    = "ami-0658a5865c623362a"  #data.aws_ami.amazon_linux_2.id  #CIS Amazon Linux 2 Benchmark - Level 1
   instance_type               = var.instance_type
   security_groups             = concat(aws_security_group.allow_egress.*.id, var.security_group_ids)
   associate_public_ip_address = false
