@@ -50,3 +50,7 @@ variable "security_group_ids" {
   description = "The security group ids which can be given to the bastion instance, defaults to empty"
   default     = []
 }
+
+variable "extra_tags" {
+  default = []
+}
