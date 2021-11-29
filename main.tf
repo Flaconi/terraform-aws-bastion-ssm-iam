@@ -83,12 +83,6 @@ resource "aws_autoscaling_group" "this" {
   health_check_type         = "EC2"
   health_check_grace_period = 30
   vpc_zone_identifier       = var.subnet_ids
-
-  tag {
-    key                 = "Name"
-    value               = var.name
-    propagate_at_launch = true
-  }
   
   tags = concat(
     [
