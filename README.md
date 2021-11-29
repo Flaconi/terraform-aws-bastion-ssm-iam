@@ -87,14 +87,15 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The subnets where the Bastion can reside in, they can be private | `list(string)` | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC-ID | `string` | n/a | yes |
 | <a name="input_create_new_ssm_document"></a> [create\_new\_ssm\_document](#input\_create\_new\_ssm\_document) | This module can create a new SSM document for the SSH Terminal | `bool` | `false` | no |
 | <a name="input_create_security_group"></a> [create\_security\_group](#input\_create\_security\_group) | This module can create a security group for the bastion instance by default | `bool` | `true` | no |
+| <a name="input_image_id"></a> [image\_id](#input\_image\_id) | AMI to be used. If blank, latest amazon linux 2 will be used | `string` | `""` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The instance type of the bastion | `string` | `"t3.nano"` | no |
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | The amount of days the logs need to be kept | `number` | `30` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name to be interpolated, defaults to bastion-ssm-iam | `string` | `"bastion-ssm-iam"` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | The security group ids which can be given to the bastion instance, defaults to empty | `list(string)` | `[]` | no |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The subnets where the Bastion can reside in, they can be private | `list(string)` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC-ID | `string` | n/a | yes |
 
 ## Outputs
 
