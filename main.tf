@@ -89,4 +89,15 @@ resource "aws_autoscaling_group" "this" {
     value               = var.name
     propagate_at_launch = true
   }
+  
+  tags = concat(
+    [
+      {
+        key                 = "Name"
+        value               = var.name
+        propagate_at_launch = true
+      },
+    ],
+    var.extra_tags,
+  )
 }
