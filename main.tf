@@ -63,7 +63,7 @@ data "template_file" "init" {
 
 ## Creating Launch Configuration
 resource "aws_launch_configuration" "this" {
-  image_id                    = var.image_id != "" ? var.image_id : data.aws_ami.amazon_linux_2.id  
+  image_id                    = var.image_id != "" ? var.image_id : data.aws_ami.amazon_linux_2.id
   instance_type               = var.instance_type
   security_groups             = concat(aws_security_group.allow_egress.*.id, var.security_group_ids)
   associate_public_ip_address = false
@@ -79,11 +79,11 @@ resource "aws_launch_configuration" "this" {
 resource "aws_autoscaling_group" "this" {
   launch_configuration      = aws_launch_configuration.this.id
   min_size                  = 1
-  max_size                  = 1 
+  max_size                  = 1
   health_check_type         = "EC2"
   health_check_grace_period = 30
   vpc_zone_identifier       = var.subnet_ids
-  
+
   tags = concat(
     [
       {
