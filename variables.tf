@@ -38,7 +38,6 @@ variable "create_new_ssm_document" {
   default     = false
 }
 
-
 variable "create_security_group" {
   type        = bool
   description = "This module can create a security group for the bastion instance by default"
@@ -51,6 +50,9 @@ variable "security_group_ids" {
   default     = []
 }
 
-variable "extra_tags" {
-  default = []
+variable "tags" {
+  type        = list(any)
+  description = "Tags to be added to the launch configuration for the bastion host, additionally to name tag"
+  default = [
+  ]
 }
