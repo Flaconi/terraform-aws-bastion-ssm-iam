@@ -51,7 +51,7 @@ variable "security_group_ids" {
 }
 
 variable "tags" {
-  type        = list(any)
+  type        = list(map(any))
   description = "Tags to be added to the launch configuration for the bastion host, additionally to name tag"
   default = [
   ]
