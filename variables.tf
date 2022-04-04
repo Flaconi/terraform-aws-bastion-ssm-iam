@@ -57,6 +57,5 @@ variable "tags" {
     propagate_at_launch = bool
   }))
   description = "Tags to be added to the launch configuration for the bastion host, additionally to name tag"
-  default = [
-  ]
+  default = []
 }
