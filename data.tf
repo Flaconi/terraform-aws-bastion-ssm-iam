@@ -9,7 +9,7 @@ data "aws_ami" "amazon_linux_2" {
     values = ["amazon"]
   }
 
-  owners = ["amazon"] # Canonical
+  owners = ["amazon"]
 
   filter {
     name   = "name"
