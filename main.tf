@@ -90,7 +90,7 @@ resource "aws_autoscaling_group" "this" {
     propagate_at_launch = true
   }
 
-  dynamic tag {
+  dynamic "tag" {
     for_each = var.tags
     content {
       key                 = tag.value["key"]
