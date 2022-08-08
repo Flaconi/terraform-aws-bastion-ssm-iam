@@ -84,14 +84,18 @@ resource "aws_autoscaling_group" "this" {
   health_check_grace_period = 30
   vpc_zone_identifier       = var.subnet_ids
 
-  tags = concat(
-    [
-      {
-        key                 = "Name"
-        value               = var.name
-        propagate_at_launch = true
-      },
-    ],
-    var.tags,
-  )
+  tag {
+    key                 = "Name"
+    value               = var.name
+    propagate_at_launch = true
+  }
+
+  dynamic "tag" {
+    for_each = var.tags
+    content {
+      key                 = tag.value["key"]
+      propagate_at_launch = tag.value["propagate_at_launch"]
+      value               = tag.value["value"]
+    }
+  }
 }
