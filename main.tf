@@ -57,10 +57,6 @@ resource "aws_security_group" "allow_egress" {
   }
 }
 
-data "template_file" "init" {
-  template = file("${path.module}/cloud_init.init")
-}
-
 ## Creating Launch Configuration
 resource "aws_launch_configuration" "this" {
   image_id                    = var.image_id != "" ? var.image_id : data.aws_ami.amazon_linux_2.id
@@ -69,7 +65,7 @@ resource "aws_launch_configuration" "this" {
   associate_public_ip_address = false
   iam_instance_profile        = aws_iam_instance_profile.this.id
 
-  user_data = data.template_file.init.rendered
+  user_data = file("${path.module}/cloud_init.init")
 
   lifecycle {
     create_before_destroy = true
