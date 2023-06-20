@@ -44,7 +44,7 @@ Example:
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.1 |
 
@@ -94,7 +94,7 @@ No modules.
 | <a name="input_log_retention"></a> [log\_retention](#input\_log\_retention) | The amount of days the logs need to be kept | `number` | `30` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name to be interpolated, defaults to bastion-ssm-iam | `string` | `"bastion-ssm-iam"` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | The security group ids which can be given to the bastion instance, defaults to empty | `list(string)` | `[]` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be added to the launch configuration for the bastion host, additionally to name tag | <pre>list(object({<br>    key                 = string<br>    value               = string<br>    propagate_at_launch = bool<br>  }))</pre> | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be added to the launch configuration for the bastion host, additionally to name tag | <pre>list(object({<br>    key                 = string<br>    value               = string<br>    propagate_at_launch = optional(bool, true)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 
