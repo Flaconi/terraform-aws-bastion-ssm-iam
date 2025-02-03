@@ -58,10 +58,9 @@ resource "aws_security_group" "allow_egress" {
 }
 
 resource "aws_launch_template" "this" {
-  name_prefix            = var.name
-  image_id               = var.image_id != "" ? var.image_id : data.aws_ami.amazon_linux_2.id
-  instance_type          = var.instance_type
-  vpc_security_group_ids = concat(aws_security_group.allow_egress.*.id, var.security_group_ids)
+  name_prefix   = var.name
+  image_id      = var.image_id != "" ? var.image_id : data.aws_ami.amazon_linux_2.id
+  instance_type = var.instance_type
 
   user_data = filebase64("${path.module}/cloud_init.init")
 
@@ -71,6 +70,10 @@ resource "aws_launch_template" "this" {
 
   network_interfaces {
     associate_public_ip_address = false
+    security_groups = concat(
+      aws_security_group.allow_egress.*.id,
+      var.security_group_ids
+    )
   }
 
   metadata_options {
